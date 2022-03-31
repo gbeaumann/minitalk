@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 11:30:20 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/03/31 13:36:44 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:08:52 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putstr(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:01:08 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/03/31 13:41:37 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:08:43 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_pid(char *pid)
 
 void	send_char(char c, pid_t pid)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 8)
@@ -62,7 +62,7 @@ void	send_message(char *message, pid_t pid)
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
-	
+
 	if (argc != 3)
 	{
 		ft_putstr("Error, invalid number of arguments\n");
