@@ -6,14 +6,16 @@
 #    By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 10:54:19 by gbeauman          #+#    #+#              #
-#    Updated: 2022/03/31 13:45:10 by gbeauman         ###   ########.fr        #
+#    Updated: 2022/04/08 10:57:34 by gbeauman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SERVER = server
 CLIENT = client
 CC = gcc
-SRC =	minitalk_fonctions.c
+SRC =	minitalk_fonctions.c\
+		minitalk_fonctions_2.c\
+		client_utils.c
 FLAGS = -Wall -Wextra -Werror
 OBJ = $(SRC:.c=.o)
 

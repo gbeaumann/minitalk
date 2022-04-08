@@ -6,41 +6,11 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 11:30:20 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/03/31 15:08:52 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/04/08 09:43:55 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"minitalk.h"
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		write (1, &str[i], 1);
-		i++;
-	}
-}
-
-void	ft_putnbr(int n)
-{
-	if (n == -2147483648)
-		write (1, "-2147483648", 11);
-	else if (n >= 0 && n <= 9)
-		ft_putchar(n + '0');
-	else if (n < 0)
-	{
-		write (1, "-", 1);
-		ft_putnbr(n * (-1));
-	}
-	else
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-}
 
 void	ft_putchar(char ch)
 {
@@ -72,4 +42,45 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (resultat * np);
+}
+
+static int	count(unsigned int n)
+{
+	if (n > 9)
+		return (count(n / 10) + 1);
+	return (1);
+}
+
+static void	itoa_putnbr(char *str, unsigned int n)
+{
+	*str = n % 10 + 48;
+	if (n > 9)
+		itoa_putnbr(--str, n / 10);
+}
+
+char	*ft_itoa(int n)
+{
+	char			*str;
+	int				i;
+	unsigned int	nb;
+
+	if (n < 0)
+	{
+		nb = -n;
+		i = count(nb);
+		i++;
+	}
+	else
+	{
+		nb = n;
+		i = count(nb);
+	}
+	str = malloc(i * sizeof(char) + 1);
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
+	itoa_putnbr(&str[i - 1], nb);
+	if (n < 0)
+		str[0] = '-';
+	return (str);
 }

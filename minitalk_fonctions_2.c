@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_fonctions_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 11:47:52 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/04/08 12:01:47 by gbeauman         ###   ########.fr       */
+/*   Created: 2022/04/08 09:41:22 by gbeauman          #+#    #+#             */
+/*   Updated: 2022/04/08 09:43:53 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include	"minitalk.h"
 
-# include	<unistd.h>
-# include	<signal.h>
-# include	<stdio.h>
-# include	<stdlib.h>
-# include	<stdalign.h>
-# include	<sys/types.h>
+void	ft_putstr(char *str)
+{
+	int	i;
 
-void	ft_putstr(char *str);
-void	ft_putnbr(int n);
-void	ft_putchar(char ch);
-int		ft_atoi(const char *str);
-char	*ft_itoa(int n);
-void	check_pid(char *pid);
-void	send_pid(int pid2, int pid);
+	i = 0;
+	while (str[i])
+	{
+		write (1, &str[i], 1);
+		i++;
+	}
+}
 
-#endif
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+		write (1, "-2147483648", 11);
+	else if (n >= 0 && n <= 9)
+		ft_putchar(n + '0');
+	else if (n < 0)
+	{
+		write (1, "-", 1);
+		ft_putnbr(n * (-1));
+	}
+	else
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+}

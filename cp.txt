@@ -1,0 +1,69 @@
+#include	"minitalk.h"
+#include	<stdio.h>
+
+void	start_is_1(int start, int signal, int tempo, int i)
+{
+	if (signal == SIGUSR1)
+		tempo = tempo | 1 << i;
+	i++;
+	if (i == 32)
+	{
+		usleep(85);
+		kill(tempo, SIGUSR1);
+		tempo = 0;
+		start = 0;
+		i = 0;
+	}
+}
+
+void	start_is_0(int signal, int i, char c, int start)
+{
+	if (signal == SIGUSR1)
+		c = c | 1 << i;
+	i++;
+	if (i == 8)
+	{
+		if (c == '\0')
+		{
+			ft_putchar('\n');
+			start = 1;
+		}
+		else
+			ft_putchar(c);
+		i = 0;
+		c = 0;
+	}
+}
+
+void	get_message(int signal)
+{
+	static char	c = 0;
+	static int	i = 0;
+	static int	start = 0;
+	static int	tempo = 0;
+
+	if (start == 1)
+	{
+		start_is_1(start, signal, tempo, i);
+		return ;
+	}
+	if (start == 0)
+	{
+		start_is_0(signal, i, c, start);
+	}
+}
+
+int	main(void)
+{
+	pid_t	pid;
+
+	pid = getpid();
+	ft_putstr("Serveur PID: ");
+	ft_putnbr(pid);
+	write (1, "\n", 1);
+	signal(SIGUSR1, get_message);
+	signal(SIGUSR2, get_message);
+	while (1)
+		;
+	return (0);
+}
